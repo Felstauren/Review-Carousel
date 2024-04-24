@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review carousel</title>
+</head>
+
+<style>
+    body {
+        background-color: antiquewhite;
+        text-align:center;
+    }
+
+    div:nth-child(2){
+        background-color: white;
+        width: 200px;   
+        height: 150px;
+        align-content: center;
+        position: relative;
+        left: 40%;
+        margin-top: 20px;   
+        margin-bottom: 20px;
+        border-radius: 10%;
+    }
+</style>
+
+<body>
+    <div>
+        <div>
+            <h1>Our Review</h1>
+        </div>
+        <div> 
+            <p id="Name"></p>
+            <p id="Job"></p> 
+            <p id="Discription"></p>
+
+            
+            <button id="back"><</button>
+            <button id ="next">></button>
+            <button id="random">Suprise Me</button>
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        fullname = document.querySelector("#Name");
+        job = document.querySelector("#Job");
+        discription = document.querySelector("#Discription");
+        btnRandom = document.querySelector("#random");
+        btnNext = document.querySelector("#next");
+        btnBack = document.querySelector("#back");
+
+        
+
+
+        const jsonText =  `[
+                {"fullname":"Müller","job": "Software ","discription": "Hello World"},
+                {"fullname":"Schmidt","job": "Web","discription": "Test"},
+                {"fullname":"Meier","job": "Frontend","discription": "Good Day"},
+                {"fullname":"Klaus","job": "Backend","discription": "END"}
+            ]`
+
+
+const obj = JSON.parse(jsonText)
+
+id =  Math.floor(Math.random()*obj.length)
+
+console.log(obj.length)
+//onload
+
+fullname.innerText = obj[id].fullname;
+job.innerText  = obj[id].job;
+discription.innerText  = obj[id].discription;
+
+
+// random Card
+
+btnRandom.addEventListener("click", e=>{
+  id =  Math.floor(Math.random()*obj.length)
+    fullname.innerText = obj[id].fullname;
+    job.innerText  = obj[id].job;
+    discription.innerText  = obj[id].discription;
+
+
+
+})
+
+
+//next Card
+
+btnNext.addEventListener("click", e=>{
+        if(id == obj.length -1){
+            alert ("Last Card")
+        } else{
+            id++;
+            console.log(id)
+            fullname.innerText = obj[id].fullname;
+            job.innerText  = obj[id].job;
+            discription.innerText  = obj[id].discription;   
+        }
+        
+})
+
+
+// back Card
+btnBack.addEventListener("click", e=>{
+    if(id == 0){
+        alert("First Card")
+    } else {
+        id--;
+        console.log(id)
+        fullname.innerText  = obj[id].fullname;
+        job.innerText  = obj[id].job;
+        discription.innerText  = obj[id].discription;
+    }
+    
+        
+})
+
+    </script>
+</body>
+</html>
